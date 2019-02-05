@@ -1,0 +1,27 @@
+.form
+{
+  width: 220px;
+  margin: auto;
+  color: white;
+  font-family: sans-serif;
+  padding: 10px 20px;
+  .form-input
+  {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    input
+    {
+      width: 150px;
+    }
+  }
+  button
+  {
+    margin-left: auto;
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+
