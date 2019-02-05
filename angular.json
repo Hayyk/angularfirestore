@@ -136,5 +136,10 @@
       }
     }
   },
-  "defaultProject": "angularfirestore"
+  "defaultProject": "angularfirestore",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
