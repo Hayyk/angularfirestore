@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MembersService } from '../../services/members.service';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
 
+  numberValidator = /[0-9]+/;
   postForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [
@@ -17,16 +19,29 @@ export class FormComponent implements OnInit {
     ]),
     number: new FormControl('', [
       Validators.required,
-      Validators.pattern('/[0-9]/')
+      Validators.pattern(this.numberValidator)
     ]),
   });
-  constructor() {
+  private submitButtonState:boolean = true;
+  constructor(private membersService: MembersService) {
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log(this.postForm.value);
+    this.submitButtonState = false;
+    this.membersService.add(this.postForm.value)
+      .then(() => {
+        this.submitButtonState = true;
+      })
+      .catch(() => {
+        this.submitButtonState = true;
+      });
+    this.postForm.setValue({
+      name: '',
+      email: '',
+      number: ''
+    });
   }
 }
